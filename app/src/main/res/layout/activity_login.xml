@@ -146,7 +146,7 @@
         android:gravity="center_horizontal"
         android:minHeight="48dp"
         android:text="Not a member? Register"
-        android:textColor="#F9E0BB"
+        android:textColor="#884A39"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
