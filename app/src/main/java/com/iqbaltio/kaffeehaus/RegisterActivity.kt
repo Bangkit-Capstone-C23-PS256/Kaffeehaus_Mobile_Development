@@ -16,15 +16,15 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.edEmail.doOnTextChanged { text, start, before, count ->
+        binding.edEmail.doOnTextChanged { text, _, _, _ ->
             if (text?.contains(("@")) != true){
                 binding.EmailInputLayout.error = "Email format must be valid"
-            }else if (text?.contains(("@")) != false ){
+            }else if (text.contains(("@"))){
                 binding.EmailInputLayout.error = null
             }
         }
 
-        binding.edPassword.doOnTextChanged { text, start, before, count ->
+        binding.edPassword.doOnTextChanged { text, _, _, _ ->
             if(text!!.length < 8){
                 binding.PasswordInputLayout.error = "Password still less than 8 character"
             }else if(text.length >= 8){
@@ -45,7 +45,10 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.edEmail.text.toString()
         val password = binding.edPassword.text.toString()
 
-        if(password.length < 8){
+        if(username.isEmpty() && email.isEmpty() && password.isEmpty()){
+            Toast.makeText(this, "Fill all first", Toast.LENGTH_SHORT).show()
+            return
+        }else if(password.length < 8){
             Toast.makeText(this, "Password doesn't have 8 character", Toast.LENGTH_SHORT).show()
             return
         }else if(username.isNotEmpty() && email.isNotEmpty() && password.length >= 8){
