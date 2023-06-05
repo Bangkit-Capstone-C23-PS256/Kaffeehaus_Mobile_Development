@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.iqbaltio.kaffeehaus.databinding.ActivityRegisterBinding
 
@@ -32,6 +33,26 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         fadeInAnimation()
+
+        binding.btnRegister.setOnClickListener{
+            sendUserData()
+        }
+
+    }
+
+    private fun sendUserData() {
+        val username = binding.edUsername.text.toString()
+        val email = binding.edEmail.text.toString()
+        val password = binding.edPassword.text.toString()
+
+        if(password.length < 8){
+            Toast.makeText(this, "Password doesn't have 8 character", Toast.LENGTH_SHORT).show()
+            return
+        }else if(username.isNotEmpty() && email.isNotEmpty() && password.length >= 8){
+            Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
     }
 
     private fun fadeInAnimation() {
