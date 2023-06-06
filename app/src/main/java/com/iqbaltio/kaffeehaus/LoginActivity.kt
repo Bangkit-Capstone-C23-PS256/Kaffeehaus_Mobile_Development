@@ -40,6 +40,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         fadeInAnimation()
+
+        binding.btnLogin.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        binding.btnGoogle.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun fadeInAnimation() {
