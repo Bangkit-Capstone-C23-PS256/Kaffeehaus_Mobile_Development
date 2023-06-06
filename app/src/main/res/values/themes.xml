@@ -14,4 +14,14 @@
         <item name="android:navigationBarColor">#FFC26F</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="searchFont" parent="Widget.AppCompat.SearchView">
+        <item name="android:fontFamily">@font/plusjakartasans</item>
+    </style>
+
 </resources>
