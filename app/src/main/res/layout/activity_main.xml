@@ -4,43 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C38154"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
-        <TextView
-            android:id="@+id/txtHallo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/plusjakartasans"
-            android:text="Hallo,"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#F9E0BB"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/plusjakartasans"
-            android:text="Iqbal Tio"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#FFC26F"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtHallo"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomAppBar"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

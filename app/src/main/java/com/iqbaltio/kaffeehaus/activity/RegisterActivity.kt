@@ -1,4 +1,4 @@
-package com.iqbaltio.kaffeehaus
+package com.iqbaltio.kaffeehaus.activity
 
 import android.animation.AnimatorSet
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {

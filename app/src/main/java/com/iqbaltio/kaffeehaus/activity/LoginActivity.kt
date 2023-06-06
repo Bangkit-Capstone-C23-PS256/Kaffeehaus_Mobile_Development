@@ -1,14 +1,12 @@
-package com.iqbaltio.kaffeehaus
+package com.iqbaltio.kaffeehaus.activity
 
-import android.animation.Animator
 import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.widget.doOnTextChanged
+import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -43,10 +41,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         binding.btnGoogle.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
