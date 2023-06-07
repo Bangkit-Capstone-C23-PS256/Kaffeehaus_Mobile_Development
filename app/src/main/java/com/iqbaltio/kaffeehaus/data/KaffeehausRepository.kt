@@ -28,7 +28,7 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
             }
         }
 
-    fun registerLogin(loginRequest: LoginRequest) : LiveData<Result<LoginResponse>> =
+    fun loginUser(loginRequest: LoginRequest) : LiveData<Result<LoginResponse>> =
         liveData {
             try {
                 val responseData = apiService.login(loginRequest)
@@ -39,7 +39,7 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
             }
         }
 
-    fun getUserData() : LiveData<UserModels>{
+    fun getUserLoginData() : LiveData<UserModels>{
         return preferences.getUser().asLiveData()
     }
 
@@ -47,8 +47,8 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
         preferences.storeUser(user)
     }
 
-    suspend fun login(){
-        preferences.loginUser()
+    suspend fun isUserLogout(){
+        preferences.isLogout()
     }
 
 }

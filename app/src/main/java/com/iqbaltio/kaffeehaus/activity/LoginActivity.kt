@@ -5,12 +5,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.iqbaltio.kaffeehaus.R
+import com.iqbaltio.kaffeehaus.data.ViewModelFactory
+import com.iqbaltio.kaffeehaus.data.api.LoginRequest
+import com.iqbaltio.kaffeehaus.data.api.UserModels
 import com.iqbaltio.kaffeehaus.databinding.ActivityLoginBinding
+import com.iqbaltio.kaffeehaus.utils.Result
+import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private val loginViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +48,40 @@ class LoginActivity : AppCompatActivity() {
         fadeInAnimation()
 
         binding.btnLogin.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            storeDataLogin()
         }
 
         binding.btnGoogle.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
+        }
+    }
+
+    private fun storeDataLogin(){
+        val responseData = LoginRequest(binding.edEmail.text.toString(), binding.edPassword.text.toString())
+        loginViewModel.Login(responseData).observe(this) { result ->
+            when(result){
+                is Result.Success -> {
+                    val responseLogin = result.data
+                    loginViewModel.storeUser(
+                        UserModels(
+                            responseLogin.loginResult?.name.toString(),
+                            responseLogin.loginResult?.id.toString(),
+                            true
+                        )
+                    )
+                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+                is Result.Loading -> { Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show() }
+                is Result.Error -> {
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this, "Something went wrong" , Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
