@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.iqbaltio.kaffeehaus.utils.Injection
 import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 
-class ViewModelFactory(private val kaffeehausRepository: KaffeehausRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repo : KaffeehausRepository) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(kaffeehausRepository) as T
+                MainViewModel(repo) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel Class : ${modelClass.name}")
         }

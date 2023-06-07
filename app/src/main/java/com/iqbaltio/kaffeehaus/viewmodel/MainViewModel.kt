@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iqbaltio.kaffeehaus.data.KaffeehausRepository
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
-import com.iqbaltio.kaffeehaus.data.api.UserModels
+import com.iqbaltio.kaffeehaus.data.api.UserModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : ViewModel() {
@@ -16,11 +16,11 @@ class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : Vi
     fun Login(loginRequest: LoginRequest) =
         kaffeehausRepository.loginUser(loginRequest)
 
-    fun getUser() : LiveData<UserModels> {
+    fun getUser() : LiveData<UserModel> {
         return kaffeehausRepository.getUserLoginData()
     }
 
-    fun storeUser(user : UserModels){
+    fun storeUser(user : UserModel){
         viewModelScope.launch {
             kaffeehausRepository.storeUserData(user)
         }

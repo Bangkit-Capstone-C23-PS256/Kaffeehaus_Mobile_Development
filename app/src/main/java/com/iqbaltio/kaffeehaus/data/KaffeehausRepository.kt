@@ -9,7 +9,7 @@ import com.iqbaltio.kaffeehaus.data.api.LoginRequest
 import com.iqbaltio.kaffeehaus.data.api.LoginResponse
 import com.iqbaltio.kaffeehaus.data.api.RegisterRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterResponse
-import com.iqbaltio.kaffeehaus.data.api.UserModels
+import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
 import kotlin.Exception
 
@@ -39,11 +39,11 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
             }
         }
 
-    fun getUserLoginData() : LiveData<UserModels>{
+    fun getUserLoginData() : LiveData<UserModel>{
         return preferences.getUser().asLiveData()
     }
 
-    suspend fun storeUserData(user : UserModels){
+    suspend fun storeUserData(user : UserModel){
         preferences.storeUser(user)
     }
 

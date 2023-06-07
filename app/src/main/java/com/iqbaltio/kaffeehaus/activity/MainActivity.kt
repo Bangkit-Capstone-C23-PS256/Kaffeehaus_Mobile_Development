@@ -1,7 +1,10 @@
 package com.iqbaltio.kaffeehaus.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.iqbaltio.kaffeehaus.R
@@ -21,6 +24,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loginViewModel.getUser().observe(this){ user ->
+            if (user != null){
+                if (user.isLogin){
+                    Log.d("SUKSES", user.toString())
+                    Toast.makeText(this, "Welcome ${user.name}", Toast.LENGTH_SHORT).show()
+                } else {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                    Log.d("GAGAL", "GAGAL")
+                }
+            }
+        }
 
         loadFragment(HomeFragment())
         binding.bottomNavigationView.setOnItemSelectedListener{
@@ -43,6 +59,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> true
             }
+        }
+
+        binding.fab.setOnClickListener {
+            loginViewModel.logoutUser()
         }
 
         binding.bottomNavigationView.background = null

@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,7 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.data.ViewModelFactory
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
-import com.iqbaltio.kaffeehaus.data.api.UserModels
+import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.databinding.ActivityLoginBinding
 import com.iqbaltio.kaffeehaus.utils.Result
 import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
@@ -60,13 +61,14 @@ class LoginActivity : AppCompatActivity() {
     private fun storeDataLogin(){
         val responseData = LoginRequest(binding.edEmail.text.toString(), binding.edPassword.text.toString())
         loginViewModel.Login(responseData).observe(this) { result ->
+            Log.d("LOG LOGIN RES", result.toString())
             when(result){
                 is Result.Success -> {
-                    val responseLogin = result.data
+                    val responseLogin = result.data.loginResult
                     loginViewModel.storeUser(
-                        UserModels(
-                            responseLogin.loginResult?.name.toString(),
-                            responseLogin.loginResult?.id.toString(),
+                        UserModel(
+                            responseLogin?.name.toString(),
+                            responseLogin?.token.toString(),
                             true
                         )
                     )
