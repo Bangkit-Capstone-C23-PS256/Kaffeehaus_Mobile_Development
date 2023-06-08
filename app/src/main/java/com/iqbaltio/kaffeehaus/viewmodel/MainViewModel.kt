@@ -32,4 +32,7 @@ class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : Vi
         }
     }
 
+    fun storePreferensi(token : String, name : String, ambience: String, utils : String, view: String, userId : String ) =
+        kaffeehausRepository.storePreferensi(token, name, ambience, utils, view, userId)
+
 }

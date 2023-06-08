@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             if (user != null){
                 if (user.isLogin){
                     Log.d("SUKSES", user.toString())
-                    Toast.makeText(this, "Welcome ${user.name}", Toast.LENGTH_SHORT).show()
                 } else {
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()

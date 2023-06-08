@@ -7,8 +7,10 @@ import androidx.lifecycle.liveData
 import com.iqbaltio.kaffeehaus.data.api.ApiService
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
 import com.iqbaltio.kaffeehaus.data.api.LoginResponse
+import com.iqbaltio.kaffeehaus.data.api.PreferensiRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterResponse
+import com.iqbaltio.kaffeehaus.data.api.ResponsePreferensi
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
 import kotlin.Exception
@@ -49,6 +51,26 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
 
     suspend fun isUserLogout(){
         preferences.isLogout()
+    }
+
+    fun storePreferensi(
+        token : String,
+        name : String,
+        ambience: String,
+        utils : String,
+        view: String,
+        userId : String,
+    ) : LiveData<Result<ResponsePreferensi>> = liveData{
+        emit(Result.Loading)
+        try {
+            val responseData = apiService.addPreferensi(token, PreferensiRequest(
+                name, ambience, utils, view, userId
+            ))
+            emit(Result.Success(responseData))
+        } catch (error : Exception){
+            Log.d("PreferensiLOG", error.message.toString())
+            emit(Result.Error(error.message.toString()))
+        }
     }
 
 }

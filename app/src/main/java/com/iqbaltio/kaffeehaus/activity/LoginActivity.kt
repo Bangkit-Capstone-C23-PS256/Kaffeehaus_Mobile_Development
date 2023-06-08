@@ -61,19 +61,19 @@ class LoginActivity : AppCompatActivity() {
     private fun storeDataLogin(){
         val responseData = LoginRequest(binding.edEmail.text.toString(), binding.edPassword.text.toString())
         loginViewModel.Login(responseData).observe(this) { result ->
-            Log.d("LOG LOGIN RES", result.toString())
             when(result){
                 is Result.Success -> {
                     val responseLogin = result.data.loginResult
                     loginViewModel.storeUser(
                         UserModel(
+                            responseLogin?.id.toString(),
                             responseLogin?.name.toString(),
                             responseLogin?.token.toString(),
                             true
                         )
                     )
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, QuizActivity::class.java))
                     finish()
                 }
                 is Result.Loading -> { Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show() }

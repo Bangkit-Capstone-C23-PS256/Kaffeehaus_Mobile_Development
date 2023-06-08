@@ -38,8 +38,24 @@ data class RegisterRequest(
 )
 
 data class UserModel(
+	val id : String,
 	val name: String,
 	val token : String,
 	val isLogin: Boolean
+)
+
+
+data class PreferensiRequest(
+	val name: String? = null,
+	val ambience: String? = null,
+	val utils: String? = null,
+	val view: String? = null,
+	val userId: String? = null
+)
+
+data class ResponsePreferensi(
+	val preferensiResult: PreferensiRequest? = null,
+	val success: Boolean? = null,
+	val message: String? = null
 )
 
