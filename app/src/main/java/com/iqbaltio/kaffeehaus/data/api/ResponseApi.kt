@@ -1,6 +1,6 @@
 package com.iqbaltio.kaffeehaus.data.api
 
-import com.google.gson.annotations.Expose
+
 import com.google.gson.annotations.SerializedName
 
 data class LoginResult(

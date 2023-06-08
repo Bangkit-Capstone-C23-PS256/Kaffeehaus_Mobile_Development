@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : ViewModel() {
 
-    fun Register(name : String, password : String, email : String) =
+    fun Register(name : String, email : String, password : String) =
         kaffeehausRepository.registerUser(name, email, password)
 
     fun Login(loginRequest: LoginRequest) =

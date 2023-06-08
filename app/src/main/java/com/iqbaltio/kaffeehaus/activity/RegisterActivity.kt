@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import com.iqbaltio.kaffeehaus.R
+import com.iqbaltio.kaffeehaus.data.ViewModelFactory
 import com.iqbaltio.kaffeehaus.databinding.ActivityRegisterBinding
+import com.iqbaltio.kaffeehaus.utils.Result
+import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
+    private val registerViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +58,20 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Password doesn't have 8 character", Toast.LENGTH_SHORT).show()
             return
         }else if(username.isNotEmpty() && email.isNotEmpty() && password.length >= 8){
-            Toast.makeText(this, "Sign Up Successfully", Toast.LENGTH_SHORT).show()
-            finish()
-            return
+            registerViewModel.Register(username, email, password).observe(this){ user ->
+                when(user){
+                    is Result.Success -> {
+                        Toast.makeText(this, user.data.message, Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    is Result.Loading -> {
+                        Toast.makeText(this, "Loading.....", Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(this, user.error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
