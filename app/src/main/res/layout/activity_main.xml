@@ -36,8 +36,6 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:tint="#884A39"
-        android:backgroundTint="#F9E0BB"
         android:src="@drawable/ic_map"
         app:layout_anchor="@id/bottomAppBar" />
 

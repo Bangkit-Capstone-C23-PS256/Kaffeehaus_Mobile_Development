@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.iqbaltio.kaffeehaus.R
+import com.iqbaltio.kaffeehaus.adapter.CafeAdapter
 import com.iqbaltio.kaffeehaus.adapter.ImageSliderAdapter
+import com.iqbaltio.kaffeehaus.data.CafeData
 import com.iqbaltio.kaffeehaus.data.ImageData
 import com.iqbaltio.kaffeehaus.databinding.FragmentHomeBinding
 
@@ -18,7 +23,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ImageSliderAdapter
+    private lateinit var adaptercafe: CafeAdapter
     private val list = ArrayList<ImageData>()
+    private val cafelist = ArrayList<CafeData>()
     private lateinit var dots: ArrayList<TextView>
 
     override fun onCreateView(
@@ -31,6 +38,48 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        cafelist.add(
+            CafeData(
+                "https://www.malangculinary.com/upload/img_1616732865.jpg",
+                "DW Coffee Shop",
+                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
+                "4.4"
+            )
+        )
+
+        cafelist.add(
+            CafeData(
+                "https://www.malangculinary.com/upload/img_1616732865.jpg",
+                "DW Coffee Shop",
+                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
+                "4.4"
+            )
+        )
+
+        cafelist.add(
+            CafeData(
+                "https://www.malangculinary.com/upload/img_1616732865.jpg",
+                "DW Coffee Shop",
+                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
+                "4.4"
+            )
+        )
+
+        cafelist.add(
+            CafeData(
+                "https://www.malangculinary.com/upload/img_1616732865.jpg",
+                "DW Coffee Shop",
+                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
+                "4.4"
+            )
+        )
+
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+
+        adaptercafe = CafeAdapter(cafelist)
+        binding.recyclerView.adapter = adaptercafe
 
         list.add(
             ImageData(

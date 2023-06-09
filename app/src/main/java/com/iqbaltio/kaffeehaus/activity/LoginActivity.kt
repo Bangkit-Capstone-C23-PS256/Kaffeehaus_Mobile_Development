@@ -51,11 +51,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener{
             storeDataLogin()
         }
-
-        binding.btnGoogle.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
     }
 
     private fun storeDataLogin(){
@@ -96,7 +91,6 @@ class LoginActivity : AppCompatActivity() {
         val logEmail = binding.EmailInputLayout
         val logPassword = binding.PasswordInputLayout
         val btnLogin = binding.btnLogin
-        val btnGoogle = binding.btnGoogle
         val regis = binding.txtRegis
 
         AnimatorSet().apply {
@@ -105,7 +99,6 @@ class LoginActivity : AppCompatActivity() {
             logEmail.startAnimation(animation)
             logPassword.startAnimation(animation)
             btnLogin.startAnimation(animation)
-            btnGoogle.startAnimation(animation)
             regis.startAnimation(animation)
         }
     }
