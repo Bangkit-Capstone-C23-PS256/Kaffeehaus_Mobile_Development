@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.data.ViewModelFactory
 import com.iqbaltio.kaffeehaus.databinding.ActivityQuizBinding
@@ -25,6 +26,9 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        window.navigationBarColor = ContextCompat.getColor(this@QuizActivity, R.color.yellowish)
+        window.statusBarColor = ContextCompat.getColor(this@QuizActivity, R.color.yellowish)
 
         binding.option1.setOnClickListener {
             binding.tvOption1.setText(R.string.option_1_vibe)
@@ -131,9 +135,9 @@ class QuizActivity : AppCompatActivity() {
 
     private fun storePreferensi(){
         loginViewModel.getUser().observe(this){ user ->
-            val token = "${user.token}"
-            val name = "${user.name}"
-            val userId = "${user.id}"
+            val token = user.token
+            val name = user.name
+            val userId = user.id
             val tvOption1Text = binding.tvOption1.text.toString()
             val tvOption2Text = binding.tvOption2.text.toString()
             val tvOption3Text = binding.tvOption3.text.toString()
