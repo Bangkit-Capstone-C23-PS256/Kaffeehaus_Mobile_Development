@@ -4,9 +4,8 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Part
 
-interface ApiService {
+interface ApiService : ApiServiceML {
 
     @POST("login")
     suspend fun login(
@@ -23,4 +22,5 @@ interface ApiService {
         @Header("x-access-token") token : String,
         @Body request : PreferensiRequest
     ) : ResponsePreferensi
+
 }

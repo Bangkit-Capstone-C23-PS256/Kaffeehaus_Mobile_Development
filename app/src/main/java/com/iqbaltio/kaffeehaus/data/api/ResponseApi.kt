@@ -1,7 +1,9 @@
 package com.iqbaltio.kaffeehaus.data.api
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class LoginResult(
 	val id: String? = null,
@@ -58,4 +60,34 @@ data class ResponsePreferensi(
 	val success: Boolean? = null,
 	val message: String? = null
 )
+
+
+data class ListResponseCafe(
+
+	@field:SerializedName("cafe")
+	val cafe: ArrayList<CafeItem>,
+
+	@field:SerializedName("message")
+	val message: String
+)
+
+
+data class CafeItem(
+
+	@field:SerializedName("address")
+	val address: String,
+
+	@field:SerializedName("url_photo")
+	val urlPhoto: String,
+
+	@field:SerializedName("name")
+	val name: String,
+
+	@field:SerializedName("rating")
+	val rating: String,
+
+	@field:SerializedName("total_review")
+	val totalReview: Int
+)
+
 

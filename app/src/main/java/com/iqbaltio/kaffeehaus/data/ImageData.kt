@@ -8,5 +8,5 @@ data class CafeData(
     val imageUrl : String,
     val title : String,
     val address : String,
-    val rating : String
+    val rating : Int
 )

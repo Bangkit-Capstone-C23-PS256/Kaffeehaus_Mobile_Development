@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                         )
                     )
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, QuizActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
                 is Result.Loading -> { Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show() }

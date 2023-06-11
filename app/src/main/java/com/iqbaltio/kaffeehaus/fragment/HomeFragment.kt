@@ -1,84 +1,59 @@
 package com.iqbaltio.kaffeehaus.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.iqbaltio.kaffeehaus.R
+import com.iqbaltio.kaffeehaus.activity.LoginActivity
 import com.iqbaltio.kaffeehaus.adapter.CafeAdapter
 import com.iqbaltio.kaffeehaus.adapter.ImageSliderAdapter
 import com.iqbaltio.kaffeehaus.data.CafeData
 import com.iqbaltio.kaffeehaus.data.ImageData
+import com.iqbaltio.kaffeehaus.data.ViewModelFactory
+import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.databinding.FragmentHomeBinding
+import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
+import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ImageSliderAdapter
     private lateinit var adaptercafe: CafeAdapter
+    private val cafeList = ArrayList<CafeItem>()
     private val list = ArrayList<ImageData>()
-    private val cafelist = ArrayList<CafeData>()
     private lateinit var dots: ArrayList<TextView>
+    private val caffeViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
+    private val loginViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding.root`
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cafelist.add(
-            CafeData(
-                "https://www.malangculinary.com/upload/img_1616732865.jpg",
-                "DW Coffee Shop",
-                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
-                "4.4"
-            )
-        )
-
-        cafelist.add(
-            CafeData(
-                "https://www.malangculinary.com/upload/img_1616732865.jpg",
-                "DW Coffee Shop",
-                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
-                "4.4"
-            )
-        )
-
-        cafelist.add(
-            CafeData(
-                "https://www.malangculinary.com/upload/img_1616732865.jpg",
-                "DW Coffee Shop",
-                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
-                "4.4"
-            )
-        )
-
-        cafelist.add(
-            CafeData(
-                "https://www.malangculinary.com/upload/img_1616732865.jpg",
-                "DW Coffee Shop",
-                "Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang",
-                "4.4"
-            )
-        )
-
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        adaptercafe = CafeAdapter(cafelist)
+        adaptercafe = CafeAdapter()  /* ajg iki di passing opo */
         binding.recyclerView.adapter = adaptercafe
 
         list.add(
@@ -98,6 +73,21 @@ class HomeFragment : Fragment() {
                 "https://images.unsplash.com/photo-1456324463128-7ff6903988d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
             )
         )
+
+        loginViewModel.getUser().observe(viewLifecycleOwner){ user ->
+            if (user != null){
+                if (user.isLogin){
+                    caffeViewModel.getCaffeList().observe(viewLifecycleOwner){
+                        // bingung ppq
+                    }
+                } else {
+                    startActivity(Intent(context, LoginActivity::class.java))
+                    activity?.finish()
+                }
+            }
+        }
+
+
 
         adapter = ImageSliderAdapter(list)
         binding.viewPager.adapter = adapter
@@ -130,4 +120,7 @@ class HomeFragment : Fragment() {
             binding.indicator.addView(dots[i])
         }
     }
+
+
+
 }

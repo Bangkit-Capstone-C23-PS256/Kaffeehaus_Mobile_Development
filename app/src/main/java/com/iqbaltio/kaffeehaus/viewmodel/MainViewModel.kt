@@ -3,7 +3,9 @@ package com.iqbaltio.kaffeehaus.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.iqbaltio.kaffeehaus.data.KaffeehausRepository
+import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import kotlinx.coroutines.launch
@@ -34,5 +36,10 @@ class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : Vi
 
     fun storePreferensi(token : String, name : String, ambience: String, utils : String, view: String, userId : String ) =
         kaffeehausRepository.storePreferensi(token, name, ambience, utils, view, userId)
+
+    fun getCaffeList() =
+        kaffeehausRepository.getCafeItemList()
+
+
 
 }

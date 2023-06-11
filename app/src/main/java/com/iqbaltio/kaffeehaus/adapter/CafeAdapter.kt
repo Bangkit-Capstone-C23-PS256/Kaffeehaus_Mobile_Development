@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.data.CafeData
 import com.iqbaltio.kaffeehaus.data.ImageData
+import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
 import com.iqbaltio.kaffeehaus.databinding.ItemSlideBinding
 
@@ -22,7 +25,7 @@ class CafeAdapter(private val cafeList: ArrayList<CafeData>) : RecyclerView.Adap
             with(binding) {
                 binding.txtTitle.text = data.title
                 binding.txtAddress.text = data.address
-                binding.txtRating.text = data.rating
+                binding.txtRating.text = data.rating.toString()
                 Glide.with(itemView)
                     .load(data.imageUrl)
                     .into(ivCafe)
@@ -39,4 +42,5 @@ class CafeAdapter(private val cafeList: ArrayList<CafeData>) : RecyclerView.Adap
     }
 
     override fun getItemCount(): Int = cafeList.size
+
 }
