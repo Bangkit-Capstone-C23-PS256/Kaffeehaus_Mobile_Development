@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root`
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        adaptercafe = CafeAdapter()  /* ajg iki di passing opo */
+        adaptercafe = CafeAdapter(cafeList)  /* ajg iki di passing opo */
         binding.recyclerView.adapter = adaptercafe
 
         list.add(
@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
             if (user != null){
                 if (user.isLogin){
                     caffeViewModel.getCaffeList().observe(viewLifecycleOwner){
-                        // bingung ppq
+//                        adaptercafe.
                     }
                 } else {
                     startActivity(Intent(context, LoginActivity::class.java))
