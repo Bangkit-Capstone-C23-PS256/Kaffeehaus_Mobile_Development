@@ -20,11 +20,12 @@ import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
 import com.iqbaltio.kaffeehaus.databinding.ItemSlideBinding
 import com.iqbaltio.kaffeehaus.utils.Result
 
-class CafeAdapter(private val cafeList: List<CafeItem>) : RecyclerView.Adapter<CafeAdapter.CafeViewHolder>(){
+class CafeAdapter(private val cafeList : List<CafeItem>) : RecyclerView.Adapter<CafeAdapter.CafeViewHolder>(){
+
 
     inner class CafeViewHolder(itemView : ItemCafeBinding) : RecyclerView.ViewHolder(itemView.root){
         private val binding = itemView
-        fun bind(data : CafeItem ) {
+        fun bind(data : CafeItem) {
             with(binding) {
                 binding.txtTitle.text = data.name
                 binding.txtAddress.text = data.address

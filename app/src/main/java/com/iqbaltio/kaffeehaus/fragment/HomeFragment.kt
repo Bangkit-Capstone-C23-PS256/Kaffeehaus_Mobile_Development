@@ -26,6 +26,7 @@ import com.iqbaltio.kaffeehaus.data.ViewModelFactory
 import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.databinding.FragmentHomeBinding
 import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
+import com.iqbaltio.kaffeehaus.utils.Result
 import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
@@ -53,8 +54,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        adaptercafe = CafeAdapter(cafeList)  /* ajg iki di passing opo */
-        binding.recyclerView.adapter = adaptercafe
+
 
         list.add(
             ImageData(
@@ -78,7 +78,18 @@ class HomeFragment : Fragment() {
             if (user != null){
                 if (user.isLogin){
                     caffeViewModel.getCaffeList().observe(viewLifecycleOwner){
-//                        adaptercafe.
+                        when(it){
+                            is Result.Success -> {
+                                adaptercafe = CafeAdapter(it.data.cafe)  /* ajg iki di passing opo */
+                                binding.recyclerView.adapter = adaptercafe
+                            }
+                            is Result.Loading -> {
+
+                            }
+                            is Result.Error -> {
+
+                            }
+                        }
                     }
                 } else {
                     startActivity(Intent(context, LoginActivity::class.java))
