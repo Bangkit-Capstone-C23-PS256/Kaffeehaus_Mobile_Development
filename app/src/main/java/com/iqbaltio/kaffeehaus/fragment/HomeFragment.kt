@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private val caffeViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
     private val loginViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
 
