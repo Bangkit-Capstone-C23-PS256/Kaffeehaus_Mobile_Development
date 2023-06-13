@@ -3,49 +3,50 @@ package com.iqbaltio.kaffeehaus.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
+import androidx.appcompat.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.activity.LoginActivity
 import com.iqbaltio.kaffeehaus.adapter.CafeAdapter
 import com.iqbaltio.kaffeehaus.adapter.ImageSliderAdapter
-import com.iqbaltio.kaffeehaus.data.CafeData
 import com.iqbaltio.kaffeehaus.data.ImageData
 import com.iqbaltio.kaffeehaus.data.ViewModelFactory
-import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.databinding.FragmentHomeBinding
-import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
 import com.iqbaltio.kaffeehaus.utils.Result
 import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ImageSliderAdapter
     private lateinit var adaptercafe: CafeAdapter
-    private val cafeList = ArrayList<CafeItem>()
     private val list = ArrayList<ImageData>()
+    private lateinit var searchView: SearchView
+    var searchJob: Job? = null
     private lateinit var dots: ArrayList<TextView>
     private val caffeViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
     private val loginViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(requireContext()) }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +54,6 @@ class HomeFragment : Fragment() {
 
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-
-
 
         list.add(
             ImageData(
@@ -84,10 +83,10 @@ class HomeFragment : Fragment() {
                                 binding.recyclerView.adapter = adaptercafe
                             }
                             is Result.Loading -> {
-
+                                Toast.makeText(activity, "Loading...", Toast.LENGTH_SHORT).show()
                             }
                             is Result.Error -> {
-
+                                Toast.makeText(activity, it.error.toString(), Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -99,7 +98,6 @@ class HomeFragment : Fragment() {
         }
 
 
-
         adapter = ImageSliderAdapter(list)
         binding.viewPager.adapter = adapter
         dots = ArrayList()
@@ -109,6 +107,54 @@ class HomeFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 selectedDots(position)
                 super.onPageSelected(position)
+            }
+        })
+
+        searchView = view.findViewById(R.id.searchView)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                caffeViewModel.getSearchList(query).observe(viewLifecycleOwner){ result ->
+                    when(result){
+                        is Result.Success -> {
+                            adaptercafe = CafeAdapter(result.data.search)
+                            binding.recyclerView.adapter = adaptercafe
+                        }
+                        is Result.Loading -> {
+                            Toast.makeText(activity, "Loading...", Toast.LENGTH_SHORT).show()
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(activity, result.error.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                searchJob?.cancel()
+                searchJob = CoroutineScope(Dispatchers.Main).launch {
+                    delay(500)
+                    if (newText.isNotEmpty()){
+                        caffeViewModel.getSearchList(newText).observe(viewLifecycleOwner){ result ->
+                            when(result){
+                                is Result.Success -> {
+                                    adaptercafe = CafeAdapter(result.data.search)
+                                    binding.recyclerView.adapter = adaptercafe
+                                }
+                                is Result.Loading -> {
+                                    Toast.makeText(activity, "Loading...", Toast.LENGTH_SHORT).show()
+                                }
+                                is Result.Error -> {
+                                    Toast.makeText(activity, result.error.toString(), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+                }
+                return false
             }
         })
     }

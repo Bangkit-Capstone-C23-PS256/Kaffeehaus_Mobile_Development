@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.iqbaltio.kaffeehaus.data.KaffeehausRepository
 import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.data.api.ListResponseCafe
+import com.iqbaltio.kaffeehaus.data.api.ListResponseSearch
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
@@ -42,6 +43,8 @@ class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : Vi
     fun getCaffeList() : LiveData<Result<ListResponseCafe>> =
         kaffeehausRepository.getCafeItemList()
 
+    fun getSearchList(userInput : String) : LiveData<Result<ListResponseSearch>> =
+        kaffeehausRepository.getSearchCafeList(userInput)
 
 
 }
