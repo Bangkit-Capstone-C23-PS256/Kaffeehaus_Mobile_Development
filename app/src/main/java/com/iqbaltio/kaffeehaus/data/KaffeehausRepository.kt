@@ -7,19 +7,19 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.iqbaltio.kaffeehaus.data.api.ApiService
 import com.iqbaltio.kaffeehaus.data.api.ApiServiceML
-import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.data.api.ListResponseCafe
+import com.iqbaltio.kaffeehaus.data.api.ListResponsePreferensi
 import com.iqbaltio.kaffeehaus.data.api.ListResponseSearch
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
 import com.iqbaltio.kaffeehaus.data.api.LoginResponse
 import com.iqbaltio.kaffeehaus.data.api.PreferensiRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterResponse
+import com.iqbaltio.kaffeehaus.data.api.RequestPreferensiAll
 import com.iqbaltio.kaffeehaus.data.api.RequestSearch
 import com.iqbaltio.kaffeehaus.data.api.ResponsePreferensi
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
-import javax.security.auth.callback.Callback
 import kotlin.Exception
 
 class KaffeehausRepository(private val preferences: UserPreferences, private val apiService: ApiService, private val apiServiceML: ApiServiceML) {
@@ -96,6 +96,16 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
        try {
            val responseData = apiServiceML.searchCafe(userInput)
            Log.d("suksesSearch", responseData.toString())
+           emit(Result.Success(responseData))
+       } catch (error : Exception){
+           emit(Result.Error(error.message.toString()))
+       }
+   }
+
+   fun getPreferensiAll(token : String, IdUser : String) : LiveData<Result<ListResponsePreferensi>> = liveData {
+       try {
+           val responseData = apiService.getPreferensiUsers(token, RequestPreferensiAll(IdUser))
+           Log.d("suksesGetPref", responseData.toString())
            emit(Result.Success(responseData))
        } catch (error : Exception){
            emit(Result.Error(error.message.toString()))

@@ -15,6 +15,7 @@ class UserPreferences private constructor(private val dataStore : DataStore<Pref
             UserModel(
                 preferences[ID_KEY] ?: "",
                 preferences[NAME_KEY] ?: "",
+                preferences[EMAIL_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
                 preferences[STATE_KEY] ?: false
             )
@@ -25,6 +26,7 @@ class UserPreferences private constructor(private val dataStore : DataStore<Pref
         dataStore.edit { preferences ->
             preferences[ID_KEY] = user.id
             preferences[NAME_KEY] = user.name
+            preferences[EMAIL_KEY] = user.email
             preferences[TOKEN_KEY] = user.token
             preferences[STATE_KEY] = user.isLogin
         }
@@ -45,6 +47,7 @@ class UserPreferences private constructor(private val dataStore : DataStore<Pref
 
         private val ID_KEY = stringPreferencesKey("id")
         private val NAME_KEY = stringPreferencesKey("name")
+        private val EMAIL_KEY = stringPreferencesKey("email")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val STATE_KEY = booleanPreferencesKey("state")
 

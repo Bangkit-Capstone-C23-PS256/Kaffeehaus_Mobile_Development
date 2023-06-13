@@ -7,6 +7,7 @@
     android:background="#C38154"
     tools:context=".activity.ProfileActivity">
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,28 +20,87 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtHallo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="250dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="250dp"
-                android:fontFamily="@font/plusjakartasans"
-                android:gravity="center"
-                android:text="Profile Coming Soon !!!"
-                android:textColor="#F9E0BB"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+
+            <ImageView
+                android:id="@+id/IvProfile"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/profil"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <TextView
+                android:id="@+id/txtNamaUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/plusjakartasans"
+                android:text="User"
+                android:textColor="#F9E0BB"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IvProfile" />
+
+            <TextView
+                android:id="@+id/txtEmailUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/plusjakartasans"
+                android:text="Email User"
+                android:textColor="#F9E0BB"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtNamaUser" />
+
+
+            <TextView
+                android:id="@+id/txtPreferensi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/plusjakartasans"
+                android:text="List Preferensi"
+                android:textColor="#F9E0BB"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtEmailUser" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPreferensiUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:paddingBottom="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtPreferensi" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#F9E0BB"
+        android:src="@drawable/baseline_add_24"
+        android:layout_marginEnd="24dp"
+        app:tint="#884A39"
+        android:layout_marginTop="600dp"
+        android:layout_gravity="end"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

@@ -1,13 +1,12 @@
 package com.iqbaltio.kaffeehaus.data.api
 
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class LoginResult(
 	val id: String? = null,
 	val name: String? = null,
+	val email: String? = null,
 	val token: String? = null
 )
 
@@ -42,6 +41,7 @@ data class RegisterRequest(
 data class UserModel(
 	val id : String,
 	val name: String,
+	val email : String,
 	val token : String,
 	val isLogin: Boolean
 )
@@ -94,6 +94,10 @@ data class RequestSearch(
 	val user_input: String? = null
 )
 
+data class RequestPreferensiAll(
+	val userId : String? = null
+)
+
 data class ListResponseSearch(
 
 	@field:SerializedName("search")
@@ -101,6 +105,31 @@ data class ListResponseSearch(
 
 	@field:SerializedName("message")
 	val message: String
+)
+
+data class ListResponsePreferensi(
+
+	@field:SerializedName("success")
+	val success: Boolean? = null,
+
+	@field:SerializedName("preferensiData")
+	val preferensiData: ArrayList<PreferensiDataItem>,
+
+	@field:SerializedName("message")
+	val message: String? = null
+)
+
+data class PreferensiDataItem(
+
+	@field:SerializedName("view")
+	val view: String? = null,
+
+	@field:SerializedName("ambience")
+	val ambience: String? = null,
+
+	@field:SerializedName("utils")
+	val utils: String? = null,
+
 )
 
 

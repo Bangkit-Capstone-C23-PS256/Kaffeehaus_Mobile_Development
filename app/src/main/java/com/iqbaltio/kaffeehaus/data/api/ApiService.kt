@@ -17,10 +17,16 @@ interface ApiService : ApiServiceML {
         @Body request: RegisterRequest
     ) : RegisterResponse
 
-    @POST("/preferensi")
+    @POST("preferensi")
     suspend fun addPreferensi(
         @Header("x-access-token") token : String,
         @Body request : PreferensiRequest
     ) : ResponsePreferensi
+
+    @POST("preferensiAll")
+    suspend fun getPreferensiUsers(
+        @Header("x-access-token") token: String,
+        @Body request : RequestPreferensiAll
+    ) : ListResponsePreferensi
 
 }
