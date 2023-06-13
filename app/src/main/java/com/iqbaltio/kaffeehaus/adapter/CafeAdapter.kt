@@ -1,11 +1,16 @@
 package com.iqbaltio.kaffeehaus.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.iqbaltio.kaffeehaus.activity.DetailCafeActivity
 import com.iqbaltio.kaffeehaus.data.api.CafeItem
+import com.iqbaltio.kaffeehaus.data.api.ListResponseCafe
 import com.iqbaltio.kaffeehaus.databinding.ItemCafeBinding
+import kotlinx.coroutines.withContext
 
 class CafeAdapter(private val cafeList : List<CafeItem>) : RecyclerView.Adapter<CafeAdapter.CafeViewHolder>(){
 

@@ -58,7 +58,8 @@
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 tools:ignore="ImageContrastCheck" />
 
-            <SearchView
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,15 +67,23 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/searchbar_background"
-                android:fontFamily="@font/plusjakartasans"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/transparent"
-                android:queryHint="Search Here..."
-                android:theme="@style/searchFont"
+                android:hint="Search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+                app:startIconDrawable="@drawable/ic_search"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfile" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchViewInput"
+                    android:layout_width="match_parent"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plusjakartasans"
+                    android:background="@drawable/searchbar_background"
+                  />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"

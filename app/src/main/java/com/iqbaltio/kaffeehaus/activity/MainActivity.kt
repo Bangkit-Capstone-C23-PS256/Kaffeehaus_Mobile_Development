@@ -1,18 +1,18 @@
 package com.iqbaltio.kaffeehaus.activity
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.KeyEvent
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.iqbaltio.kaffeehaus.R
@@ -20,11 +20,8 @@ import com.iqbaltio.kaffeehaus.adapter.CafeAdapter
 import com.iqbaltio.kaffeehaus.adapter.ImageSliderAdapter
 import com.iqbaltio.kaffeehaus.data.ImageData
 import com.iqbaltio.kaffeehaus.data.ViewModelFactory
+import com.iqbaltio.kaffeehaus.data.api.RequestSearch
 import com.iqbaltio.kaffeehaus.databinding.ActivityMainBinding
-import com.iqbaltio.kaffeehaus.fragment.FavoriteFragment
-import com.iqbaltio.kaffeehaus.fragment.HomeFragment
-import com.iqbaltio.kaffeehaus.fragment.ProfileFragment
-import com.iqbaltio.kaffeehaus.fragment.SearchFragment
 import com.iqbaltio.kaffeehaus.utils.Result
 import com.iqbaltio.kaffeehaus.viewmodel.MainViewModel
 import kotlinx.coroutines.Job
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         loginViewModel.getUser().observe(this){ user ->
             if (user != null){
                 if (user.isLogin){
+                    binding.txtName.text = user.name
                     Log.d("SUKSES", user.toString())
                 } else {
                     startActivity(Intent(this, LoginActivity::class.java))
@@ -76,6 +74,34 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+
+        binding.searchViewInput.setOnKeyListener(View.OnKeyListener{v, keyCode, event ->
+
+            val query = binding.searchViewInput.text.toString()
+
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
+                caffeViewModel.getSearchList(RequestSearch(query)).observe(this){ cafe ->
+                    when(cafe){
+                        is Result.Success -> {
+                            binding.searchViewInput.text!!.clear()
+                            adaptercafe = CafeAdapter(cafe.data.search)
+                            binding.recyclerView.adapter = adaptercafe
+                        }
+                        is Result.Loading -> {
+                            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(this, cafe.error.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                return@OnKeyListener true
+            }
+            false
+        })
+
+
+
         loginViewModel.getUser().observe(this){ user ->
             if (user != null){
                 if (user.isLogin){
@@ -99,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
 
 
         adapter = ImageSliderAdapter(list)
@@ -160,4 +187,5 @@ class MainActivity : AppCompatActivity() {
             binding.indicator.addView(dots[i])
         }
     }
+
 }

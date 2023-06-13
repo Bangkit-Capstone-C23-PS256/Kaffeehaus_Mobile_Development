@@ -9,6 +9,7 @@ import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.data.api.ListResponseCafe
 import com.iqbaltio.kaffeehaus.data.api.ListResponseSearch
 import com.iqbaltio.kaffeehaus.data.api.LoginRequest
+import com.iqbaltio.kaffeehaus.data.api.RequestSearch
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : Vi
     fun getCaffeList() : LiveData<Result<ListResponseCafe>> =
         kaffeehausRepository.getCafeItemList()
 
-    fun getSearchList(userInput : String) : LiveData<Result<ListResponseSearch>> =
+    fun getSearchList(userInput : RequestSearch) : LiveData<Result<ListResponseSearch>> =
         kaffeehausRepository.getSearchCafeList(userInput)
 
 

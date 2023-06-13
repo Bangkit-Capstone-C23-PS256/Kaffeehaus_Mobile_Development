@@ -90,10 +90,14 @@ data class CafeItem(
 	val totalReview: Int
 )
 
+data class RequestSearch(
+	val user_input: String? = null
+)
+
 data class ListResponseSearch(
 
 	@field:SerializedName("search")
-	val search: List<CafeItem>,
+	val search: ArrayList<CafeItem>,
 
 	@field:SerializedName("message")
 	val message: String

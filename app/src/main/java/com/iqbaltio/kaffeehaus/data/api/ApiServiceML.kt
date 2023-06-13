@@ -12,9 +12,9 @@ interface ApiServiceML {
     suspend fun listCaffe(
     ) : ListResponseCafe
 
-    @POST("/search")
+    @POST("search")
     suspend fun searchCafe(
-        @Query("user_input") user_input : String
+        @Body user_input : RequestSearch
     ) : ListResponseSearch
 
 }

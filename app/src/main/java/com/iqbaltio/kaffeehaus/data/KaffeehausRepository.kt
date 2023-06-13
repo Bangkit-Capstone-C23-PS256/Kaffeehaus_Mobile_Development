@@ -15,6 +15,7 @@ import com.iqbaltio.kaffeehaus.data.api.LoginResponse
 import com.iqbaltio.kaffeehaus.data.api.PreferensiRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterRequest
 import com.iqbaltio.kaffeehaus.data.api.RegisterResponse
+import com.iqbaltio.kaffeehaus.data.api.RequestSearch
 import com.iqbaltio.kaffeehaus.data.api.ResponsePreferensi
 import com.iqbaltio.kaffeehaus.data.api.UserModel
 import com.iqbaltio.kaffeehaus.utils.Result
@@ -91,7 +92,7 @@ class KaffeehausRepository(private val preferences: UserPreferences, private val
        }
    }
 
-   fun getSearchCafeList(userInput : String) : LiveData<Result<ListResponseSearch>> = liveData {
+   fun getSearchCafeList(userInput : RequestSearch) : LiveData<Result<ListResponseSearch>> = liveData {
        try {
            val responseData = apiServiceML.searchCafe(userInput)
            Log.d("suksesSearch", responseData.toString())

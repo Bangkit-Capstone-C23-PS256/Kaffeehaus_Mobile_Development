@@ -110,53 +110,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        searchView = view.findViewById(R.id.searchView)
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-                caffeViewModel.getSearchList(query).observe(viewLifecycleOwner){ result ->
-                    when(result){
-                        is Result.Success -> {
-                            adaptercafe = CafeAdapter(result.data.search)
-                            binding.recyclerView.adapter = adaptercafe
-                        }
-                        is Result.Loading -> {
-                            Toast.makeText(activity, "Loading...", Toast.LENGTH_SHORT).show()
-                        }
-                        is Result.Error -> {
-                            Toast.makeText(activity, result.error.toString(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-                searchView.clearFocus()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                searchJob?.cancel()
-                searchJob = CoroutineScope(Dispatchers.Main).launch {
-                    delay(500)
-                    if (newText.isNotEmpty()){
-                        caffeViewModel.getSearchList(newText).observe(viewLifecycleOwner){ result ->
-                            when(result){
-                                is Result.Success -> {
-                                    adaptercafe = CafeAdapter(result.data.search)
-                                    binding.recyclerView.adapter = adaptercafe
-                                }
-                                is Result.Loading -> {
-                                    Toast.makeText(activity, "Loading...", Toast.LENGTH_SHORT).show()
-                                }
-                                is Result.Error -> {
-                                    Toast.makeText(activity, result.error.toString(), Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        }
-                    }
-                }
-                return false
-            }
-        })
     }
 
     private fun selectedDots(position: Int) {
