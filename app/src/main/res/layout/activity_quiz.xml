@@ -8,6 +8,17 @@
     tools:context=".activity.QuizActivity">
 
 
+    <EditText
+        android:id="@+id/edNamePreferensi"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:alpha="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/QuizTextView"
         android:layout_width="wrap_content"
@@ -168,6 +179,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/option1" />
+
 
     <Button
         android:id="@+id/option32"

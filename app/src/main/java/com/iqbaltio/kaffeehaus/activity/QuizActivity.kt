@@ -130,8 +130,14 @@ class QuizActivity : AppCompatActivity() {
 
     private fun playAnimation3(){
         val tvOption3 = ObjectAnimator.ofFloat(binding.tvOption3, View.ALPHA, 1f).setDuration(800)
+        val option31Btn = ObjectAnimator.ofFloat(binding.option31, View.ALPHA, 0f).setDuration(500)
+        val option32Btn = ObjectAnimator.ofFloat(binding.option32, View.ALPHA, 0f).setDuration(500)
+        val option33Btn = ObjectAnimator.ofFloat(binding.option33, View.ALPHA, 0f).setDuration(500)
+        val option34Btn = ObjectAnimator.ofFloat(binding.option34, View.ALPHA, 0f).setDuration(500)
+        binding.edNamePreferensi.visibility = View.VISIBLE
+        val edNamePref = ObjectAnimator.ofFloat(binding.edNamePreferensi, View.ALPHA, 1f).setDuration(500)
         AnimatorSet().apply {
-            playSequentially(tvOption3)
+            playSequentially(tvOption3, option31Btn, option32Btn, option33Btn, option34Btn, edNamePref)
             start()
         }
     }

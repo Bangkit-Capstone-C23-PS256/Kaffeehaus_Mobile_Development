@@ -1,5 +1,6 @@
 package com.iqbaltio.kaffeehaus.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,9 +25,7 @@ class CafeAdapter(private val cafeList : List<CafeItem>) : RecyclerView.Adapter<
                     .into(ivCafe)
                 binding.fabCafe.setOnClickListener {
                     val acontext = binding.fabCafe.context
-                    val sendName = data.name
-                    val pindah = Intent(acontext, DetailCafeActivity::class.java)
-                    pindah.putExtra(DetailCafeActivity.EXTRADATA, sendName)
+                    val pindah = IntentCafe(acontext, data)
                     acontext.startActivity(pindah)
                 }
             }
@@ -43,4 +42,12 @@ class CafeAdapter(private val cafeList : List<CafeItem>) : RecyclerView.Adapter<
 
     override fun getItemCount(): Int = cafeList.size
 
+    private fun IntentCafe(context: Context, cafe : CafeItem) : Intent {
+        return Intent(context, DetailCafeActivity::class.java).apply {
+            putExtra(DetailCafeActivity.EXTRA_NAME, cafe.name)
+            putExtra(DetailCafeActivity.EXTRA_ADDRESS, cafe.address)
+            putExtra(DetailCafeActivity.EXTRA_RATING, cafe.rating)
+            putExtra(DetailCafeActivity.EXTRA_PHOTO_URL, cafe.urlPhoto)
+        }
+    }
 }
