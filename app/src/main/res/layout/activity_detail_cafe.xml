@@ -4,6 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFC26F"
     tools:context=".activity.DetailCafeActivity">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_detail_cafe"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImage" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/plusjakartasans"
+        android:text="DW Coffee Shop"
+        android:textColor="@color/main"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_detail_cafe" />
+
+    <ImageView
+        android:id="@+id/icLocation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        app:tint="@color/main" />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/plusjakartasans"
+        android:text="Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang"
+        android:textColor="#C38154"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icLocation"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

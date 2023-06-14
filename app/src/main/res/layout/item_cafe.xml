@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/fabCafe"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
