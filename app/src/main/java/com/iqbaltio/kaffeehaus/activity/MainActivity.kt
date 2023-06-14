@@ -75,30 +75,30 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-//        binding.searchViewInput.setOnKeyListener(View.OnKeyListener{ _, keyCode, event ->
-//
-//            val query = binding.searchViewInput.text.toString()
-//
-//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
-//                caffeViewModel.getSearchList(RequestSearch(query)).observe(this){ cafe ->
-//                    when(cafe){
-//                        is Result.Success -> {
-//                            binding.searchViewInput.text!!.clear()
-//                            adaptercafe = CafeAdapter(cafe.data.search)
-//                            binding.recyclerView.adapter = adaptercafe
-//                        }
-//                        is Result.Loading -> {
-//                            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
-//                        }
-//                        is Result.Error -> {
-//                            Toast.makeText(this, cafe.error.toString(), Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//                return@OnKeyListener true
-//            }
-//            false
-//        })
+        binding.searchViewInput.setOnKeyListener(View.OnKeyListener{ _, keyCode, event ->
+
+            val query = binding.searchViewInput.text.toString()
+
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
+                caffeViewModel.getSearchList(RequestSearch(query)).observe(this){ cafe ->
+                    when(cafe){
+                        is Result.Success -> {
+                            binding.searchViewInput.text!!.clear()
+                            adaptercafe = CafeAdapter(cafe.data.search)
+                            binding.recyclerView.adapter = adaptercafe
+                        }
+                        is Result.Loading -> {
+                            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(this, cafe.error.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                return@OnKeyListener true
+            }
+            false
+        })
 
 
 

@@ -12,12 +12,28 @@
         android:id="@+id/edNamePreferensi"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginTop="160dp"
         android:alpha="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/quizPreference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/plusjakartasans"
+        android:text="Name your cafe preference"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:alpha="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/QuizTextView"
@@ -29,6 +45,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -122,6 +139,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/option_1_vibe"
         android:textSize="15sp"
+        android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvOption1" />
@@ -162,6 +180,7 @@
         android:layout_marginTop="6dp"
         android:text="@string/option_2_vibe"
         android:textSize="15sp"
+        android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/option1" />
@@ -203,6 +222,7 @@
         android:layout_marginTop="6dp"
         android:text="@string/option_3_vibe"
         android:textSize="15sp"
+        android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/option2" />
@@ -243,6 +263,7 @@
         android:layout_marginTop="6dp"
         android:text="@string/option_4_vibe"
         android:textSize="15sp"
+        android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/option3" />
