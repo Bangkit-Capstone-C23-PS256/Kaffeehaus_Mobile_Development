@@ -7,13 +7,14 @@
     android:background="#FFC26F"
     tools:context=".activity.QuizActivity">
 
+
     <TextView
-        android:id="@+id/QuizText"
+        android:id="@+id/QuizTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:fontFamily="@font/plusjakartasans"
-        android:text="What ambience do you want ?"
+        android:text="@string/txt_view_question"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -21,10 +22,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/tvOption1"
         android:layout_width="80dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="-5dp"
         android:layout_marginTop="10dp"
         android:alpha="0"
@@ -33,15 +35,16 @@
         android:gravity="center"
         android:text="Option 1"
         android:textColor="@color/secondary"
+        android:layout_marginStart="70dp"
         android:textSize="14sp"
         android:textStyle="normal"
-        app:layout_constraintStart_toStartOf="@id/QuizText"
-        app:layout_constraintTop_toBottomOf="@id/QuizText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/QuizTextView" />
 
     <TextView
         android:id="@+id/tvOption2"
         android:layout_width="80dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:alpha="0"
@@ -53,12 +56,12 @@
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintLeft_toRightOf="@id/tvOption1"
-        app:layout_constraintTop_toBottomOf="@id/QuizText" />
+        app:layout_constraintTop_toBottomOf="@id/QuizTextView" />
 
     <TextView
         android:id="@+id/tvOption3"
         android:layout_width="80dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:alpha="0"
@@ -70,7 +73,7 @@
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintLeft_toRightOf="@id/tvOption2"
-        app:layout_constraintTop_toBottomOf="@id/QuizText" />
+        app:layout_constraintTop_toBottomOf="@id/QuizTextView" />
 
     <Button
         android:id="@+id/option1"

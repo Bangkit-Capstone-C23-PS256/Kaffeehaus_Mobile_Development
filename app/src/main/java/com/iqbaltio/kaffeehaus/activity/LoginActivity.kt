@@ -63,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                         UserModel(
                             responseLogin?.id.toString(),
                             responseLogin?.name.toString(),
-                            binding.edEmail.text.toString(),
+                            responseLogin?.email.toString(),
                             responseLogin?.token.toString(),
                             true
                         )

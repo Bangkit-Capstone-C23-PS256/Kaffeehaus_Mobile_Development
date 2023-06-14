@@ -15,4 +15,7 @@
     <string name="option_3_2_view">Relaxing</string>
     <string name="option_3_3_view">Vintage</string>
     <string name="option_3_4_view">Classic</string>
+    <string name="txt_view_question">What View do you want ?</string>
+    <string name="txt_ambience_question">What Ambience do you want ?</string>
+    <string name="txt_utils_question">What Utils do you want ?</string>
 </resources>

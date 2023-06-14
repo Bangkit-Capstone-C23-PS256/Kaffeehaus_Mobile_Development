@@ -32,14 +32,17 @@ class QuizActivity : AppCompatActivity() {
 
         binding.option1.setOnClickListener {
             binding.tvOption1.setText(R.string.option_1_vibe)
+            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option2.setOnClickListener {
             binding.tvOption1.setText(R.string.option_2_vibe)
+            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option3.setOnClickListener {
             binding.tvOption1.setText(R.string.option_3_vibe)
+            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option4.setOnClickListener {
@@ -131,6 +134,12 @@ class QuizActivity : AppCompatActivity() {
             playSequentially(tvOption3)
             start()
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+        return
     }
 
     private fun storePreferensi(){

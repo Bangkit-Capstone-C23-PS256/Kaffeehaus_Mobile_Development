@@ -20,6 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogoutProfile"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                app:icon="@drawable/baseline_logout_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/IvProfile"
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"/>
 
             <ImageView
                 android:id="@+id/IvProfile"
@@ -91,17 +100,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#F9E0BB"
-        android:src="@drawable/baseline_add_24"
-        android:layout_marginEnd="24dp"
-        app:tint="#884A39"
-        android:layout_marginTop="600dp"
-        android:layout_gravity="end"/>
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -123,11 +121,11 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAddPref"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#F9E0BB"
-        android:src="@drawable/ic_map"
+        android:src="@drawable/baseline_add_24"
         app:layout_anchor="@id/bottomAppBar"
         app:tint="#884A39"
         tools:ignore="SpeakableTextPresentCheck"

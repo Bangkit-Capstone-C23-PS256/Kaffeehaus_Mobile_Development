@@ -65,6 +65,15 @@ class ProfileActivity : AppCompatActivity() {
         binding.bottomNavigationView.background = null
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false
 
+        binding.fabAddPref.setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
+            finish()
+        }
+
+        binding.btnLogoutProfile.setOnClickListener {
+            loginViewModel.logoutUser()
+        }
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navHome -> {

@@ -22,7 +22,7 @@
             android:text="View"
             android:layout_marginTop="5dp"
             android:layout_marginStart="5dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold"/>
@@ -33,11 +33,11 @@
             android:layout_height="wrap_content"
             android:text="Ambience"
             android:fontFamily="@font/plusjakartasans"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="50dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvViewTitle"
             android:textStyle="bold"/>
 
         <TextView
@@ -46,12 +46,13 @@
             android:layout_height="wrap_content"
             android:text="Utils"
             android:layout_marginEnd="5dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:fontFamily="@font/plusjakartasans"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="40dp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/tvAmbienceTitle"/>
 
         <TextView
             android:id="@+id/tvOptionView"
@@ -63,7 +64,7 @@
             android:layout_marginStart="5dp"
             app:layout_constraintTop_toBottomOf="@id/tvViewTitle"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="18sp"/>
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/tvOptionAmbience"
@@ -72,10 +73,10 @@
             android:text="Cool"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/tvAmbienceTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvAmbienceTitle"
+            app:layout_constraintEnd_toEndOf="@id/tvAmbienceTitle"
             android:fontFamily="@font/plusjakartasans"
-            android:textSize="18sp"/>
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/tvOptionUtils"
@@ -85,27 +86,21 @@
             android:fontFamily="@font/plusjakartasans"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="20dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tvUtilsTitle"
+            app:layout_constraintEnd_toEndOf="@id/tvUtilsTitle"
             app:layout_constraintTop_toBottomOf="@id/tvUtilsTitle"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSearchPref"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="60dp"
+            android:background="@android:color/transparent"
+            android:layout_height="60dp"
             android:fontFamily="@font/plusjakartasans"
-            android:text="Search"
-            android:textSize="20sp"
-            android:textColor="#F6F6F6"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:background="@drawable/login_button"
+            app:icon="@drawable/ic_search"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOptionAmbience" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
