@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -129,15 +130,23 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun playAnimation3(){
-        val tvOption3 = ObjectAnimator.ofFloat(binding.tvOption3, View.ALPHA, 1f).setDuration(800)
-        val option31Btn = ObjectAnimator.ofFloat(binding.option31, View.ALPHA, 0f).setDuration(500)
-        val option32Btn = ObjectAnimator.ofFloat(binding.option32, View.ALPHA, 0f).setDuration(500)
-        val option33Btn = ObjectAnimator.ofFloat(binding.option33, View.ALPHA, 0f).setDuration(500)
-        val option34Btn = ObjectAnimator.ofFloat(binding.option34, View.ALPHA, 0f).setDuration(500)
+        val tvOption3 = ObjectAnimator.ofFloat(binding.tvOption3, View.ALPHA, 1f).setDuration(100)
+        val option31Btn = ObjectAnimator.ofFloat(binding.option31, View.ALPHA, 0f).setDuration(200)
+        val option32Btn = ObjectAnimator.ofFloat(binding.option32, View.ALPHA, 0f).setDuration(200)
+        val option33Btn = ObjectAnimator.ofFloat(binding.option33, View.ALPHA, 0f).setDuration(200)
+        val option34Btn = ObjectAnimator.ofFloat(binding.option34, View.ALPHA, 0f).setDuration(200)
+        val txtViewQuest = ObjectAnimator.ofFloat(binding.QuizTextView3, View.ALPHA, 0f).setDuration(200)
+        val prefName = ObjectAnimator.ofFloat(binding.quizPreference, View.ALPHA, 1f).setDuration(800)
         binding.edNamePreferensi.visibility = View.VISIBLE
         val edNamePref = ObjectAnimator.ofFloat(binding.edNamePreferensi, View.ALPHA, 1f).setDuration(500)
+
+        binding.quizPreference.animate().translationYBy(300F).duration = 500
+        binding.tvOption1.animate().translationYBy(350F).duration = 800
+        binding.tvOption2.animate().translationYBy(350F).duration = 800
+        binding.tvOption3.animate().translationYBy(350F).duration = 800
+
         AnimatorSet().apply {
-            playSequentially(tvOption3, option31Btn, option32Btn, option33Btn, option34Btn, edNamePref)
+            playSequentially(tvOption3, option31Btn, option32Btn, option33Btn, option34Btn, txtViewQuest, prefName, edNamePref)
             start()
         }
     }
