@@ -32,17 +32,14 @@ class QuizActivity : AppCompatActivity() {
 
         binding.option1.setOnClickListener {
             binding.tvOption1.setText(R.string.option_1_vibe)
-            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option2.setOnClickListener {
             binding.tvOption1.setText(R.string.option_2_vibe)
-            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option3.setOnClickListener {
             binding.tvOption1.setText(R.string.option_3_vibe)
-            binding.QuizTextView.setText(R.string.txt_ambience_question)
             playAnimation()
         }
         binding.option4.setOnClickListener {
@@ -101,8 +98,10 @@ class QuizActivity : AppCompatActivity() {
         val option23Btn = ObjectAnimator.ofFloat(binding.option23, View.ALPHA, 1f).setDuration(500)
         binding.option24.visibility = View.VISIBLE
         val option24Btn = ObjectAnimator.ofFloat(binding.option24, View.ALPHA, 1f).setDuration(500)
+        val txtAmbienceQuest = ObjectAnimator.ofFloat(binding.QuizTextView, View.ALPHA, 0f).setDuration(500)
+        val txtUtilsQuest = ObjectAnimator.ofFloat(binding.QuizTextView2, View.ALPHA, 1f).setDuration(500)
         AnimatorSet().apply {
-            playSequentially(tvOption1,option1Btn, option2Btn, option3Btn, option4Btn, option21Btn, option22Btn, option23Btn, option24Btn)
+            playSequentially(tvOption1,txtAmbienceQuest,option1Btn, option2Btn, option3Btn, option4Btn, txtUtilsQuest, option21Btn, option22Btn, option23Btn, option24Btn)
             start()
         }
     }
@@ -121,9 +120,10 @@ class QuizActivity : AppCompatActivity() {
         val option33Btn = ObjectAnimator.ofFloat(binding.option33, View.ALPHA, 1f).setDuration(500)
         binding.option34.visibility = View.VISIBLE
         val option34Btn = ObjectAnimator.ofFloat(binding.option34, View.ALPHA, 1f).setDuration(500)
-
+        val txtViewQuest = ObjectAnimator.ofFloat(binding.QuizTextView3, View.ALPHA, 1f).setDuration(500)
+        val txtUtilsQuest = ObjectAnimator.ofFloat(binding.QuizTextView2, View.ALPHA, 0f).setDuration(500)
         AnimatorSet().apply {
-            playSequentially(tvOption2, option21Btn, option22Btn, option23Btn, option24Btn, option31Btn, option32Btn, option33Btn, option34Btn)
+            playSequentially(tvOption2, txtUtilsQuest, option21Btn, option22Btn, option23Btn, option24Btn, txtViewQuest, option31Btn, option32Btn, option33Btn, option34Btn)
             start()
         }
     }
