@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.iqbaltio.kaffeehaus.R
+import com.iqbaltio.kaffeehaus.adapter.CustomInfoAdapter
 import com.iqbaltio.kaffeehaus.data.ViewModelFactory
 import com.iqbaltio.kaffeehaus.data.api.CafeItem
 import com.iqbaltio.kaffeehaus.data.api.RequestSearch
@@ -73,10 +74,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun makeMarker(listCafe : List<CafeItem>){
         for (cafe in listCafe){
             val latlng = LatLng(cafe.latitude, cafe.longitude)
+            mMap.setInfoWindowAdapter(CustomInfoAdapter(this, listCafe))
             mMap.addMarker(
                 MarkerOptions()
                     .position(latlng)
-                    .snippet(cafe.rating + " || " + cafe.address)
+//                    .snippet(cafe.rating + " || " + cafe.address)
                     .title(cafe.name)
             )
         }
