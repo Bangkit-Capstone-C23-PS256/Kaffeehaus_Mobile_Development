@@ -87,7 +87,16 @@ data class CafeItem(
 	val rating: String,
 
 	@field:SerializedName("total_review")
-	val totalReview: Int
+	val totalReview: Int,
+
+	@field:SerializedName("longitude")
+	val longitude: Double,
+
+	@field:SerializedName("latitude")
+	val latitude: Double,
+
+	@field:SerializedName("place_id")
+	val placeId: String
 )
 
 data class RequestSearch(

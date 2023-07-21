@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ImageSliderAdapter
     private lateinit var adaptercafe: CafeAdapter
     private val list = ArrayList<ImageData>()
+    private lateinit var queryUser : String
     private lateinit var dots: ArrayList<TextView>
     private val caffeViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(this) }
     private val loginViewModel by viewModels<MainViewModel> { ViewModelFactory.getInstance(this) }
@@ -77,10 +78,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.searchViewInput.setOnKeyListener(View.OnKeyListener{ _, keyCode, event ->
 
-            val query = binding.searchViewInput.text.toString()
+            queryUser = binding.searchViewInput.text.toString()
 
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
-                caffeViewModel.getSearchList(RequestSearch(query)).observe(this){ cafe ->
+                caffeViewModel.getSearchList(RequestSearch(queryUser)).observe(this){ cafe ->
                     when(cafe){
                         is Result.Success -> {
                             binding.searchViewInput.text!!.clear()
@@ -162,7 +163,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fab.setOnClickListener {
-            loginViewModel.logoutUser()
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("user_input", queryUser)
+            startActivity(intent)
         }
 
         binding.bottomNavigationView.background = null
