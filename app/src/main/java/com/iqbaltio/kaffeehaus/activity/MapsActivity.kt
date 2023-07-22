@@ -55,19 +55,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun setDataMap(){
         val queryUser = intent.getStringExtra("user_input")
-        mainViewModel.getSearchList(RequestSearch(queryUser)).observe(this){ cafe ->
-            when(cafe){
-                is Result.Success -> {
-                    makeMarker(cafe.data.search)
+        if (queryUser != null){
+            mainViewModel.getSearchList(RequestSearch(queryUser)).observe(this){ cafe ->
+                when(cafe){
+                    is Result.Success -> {
+                        makeMarker(cafe.data.search)
+                    }
+                    is Result.Loading -> {
+                        Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(this, cafe.error, Toast.LENGTH_SHORT).show()
+                    }
                 }
-                is Result.Loading -> {
-                    Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show()
-                }
-                is Result.Error -> {
-                    Toast.makeText(this, cafe.error, Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            mainViewModel.getSearchList(RequestSearch("beautiful cafe with fast wifi")).observe(this){ cafe ->
+                when(cafe){
+                    is Result.Success -> {
+                        makeMarker(cafe.data.search)
+                    }
+                    is Result.Loading -> {
+                        Toast.makeText(this, "Loading....", Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(this, cafe.error, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
+
     }
 
 

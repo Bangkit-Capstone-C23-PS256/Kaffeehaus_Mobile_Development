@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                     when(cafe){
                         is Result.Success -> {
                             binding.searchViewInput.text!!.clear()
+                            Toast.makeText(this, "Searching cafe with ${queryUser} keyword....", Toast.LENGTH_SHORT).show()
                             adaptercafe = CafeAdapter(cafe.data.search)
                             binding.recyclerView.adapter = adaptercafe
                         }
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show()
                         }
                         is Result.Error -> {
-                            Toast.makeText(this, cafe.error.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "The Query must be in english \n${cafe.error}", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                     caffeViewModel.getCaffeList().observe(this){
                         when(it){
                             is Result.Success -> {
-                                adaptercafe = CafeAdapter(it.data.cafe)  /* ajg iki di passing opo */
+                                adaptercafe = CafeAdapter(it.data.cafe)
                                 binding.recyclerView.adapter = adaptercafe
                             }
                             is Result.Loading -> {
@@ -163,9 +164,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fab.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
-            intent.putExtra("user_input", queryUser)
-            startActivity(intent)
+            queryUser = ""
+            if (queryUser.isNotEmpty()){
+                val intent = Intent(this, MapsActivity::class.java)
+                intent.putExtra("user_input", queryUser)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+            }
+
         }
 
         binding.bottomNavigationView.background = null
