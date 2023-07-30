@@ -45,17 +45,18 @@
 
     <TextView
         android:id="@+id/txtAddress"
-        android:layout_width="350dp"
+        android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
         android:fontFamily="@font/plusjakartasans"
         android:text="Jl. Bogor No.11, Sumbersari, Kec. Lowokwaru, Kota Malang"
         android:textColor="#C38154"
-        android:textSize="19sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toEndOf="@+id/icLocation"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 

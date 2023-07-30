@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.iqbaltio.kaffeehaus.R
 import com.iqbaltio.kaffeehaus.adapter.CafeAdapter
@@ -55,7 +56,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+//        caffeViewModel.isLoading.observe(this, ::showLoading)
 
         list.add(
             ImageData(
@@ -81,9 +84,12 @@ class MainActivity : AppCompatActivity() {
             queryUser = binding.searchViewInput.text.toString()
 
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP){
+
+                binding.progressBar.visibility = View.VISIBLE
                 caffeViewModel.getSearchList(RequestSearch(queryUser)).observe(this){ cafe ->
                     when(cafe){
                         is Result.Success -> {
+                            binding.progressBar.visibility = View.GONE
                             binding.searchViewInput.text!!.clear()
                             Toast.makeText(this, "Searching cafe with ${queryUser} keyword....", Toast.LENGTH_SHORT).show()
                             adaptercafe = CafeAdapter(cafe.data.search)
@@ -107,9 +113,11 @@ class MainActivity : AppCompatActivity() {
         loginViewModel.getUser().observe(this){ user ->
             if (user != null){
                 if (user.isLogin){
+                    binding.progressBar.visibility = View.VISIBLE
                     caffeViewModel.getCaffeList().observe(this){
                         when(it){
                             is Result.Success -> {
+                                binding.progressBar.visibility = View.GONE
                                 adaptercafe = CafeAdapter(it.data.cafe)
                                 binding.recyclerView.adapter = adaptercafe
                             }
@@ -127,8 +135,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
 
         adapter = ImageSliderAdapter(list)
         binding.viewPager.adapter = adapter
@@ -179,6 +185,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.background = null
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false
     }
+
+//    private fun showLoading(isLoading: Boolean) {
+//        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+//    }
 
     private fun selectedDots(position: Int) {
         for(i in 0 until list.size){

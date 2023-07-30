@@ -1,6 +1,7 @@
 package com.iqbaltio.kaffeehaus.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -17,6 +18,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val kaffeehausRepository: KaffeehausRepository) : ViewModel() {
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
     fun Register(name : String, email : String, password : String) =
         kaffeehausRepository.registerUser(name, email, password)
 
